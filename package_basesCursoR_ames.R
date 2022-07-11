@@ -42,41 +42,33 @@ ames2 <- ames1 %>%
   drop_na()
 View(ames2)
 
-p1 <- ggplot(cred2, aes(x = fct_reorder(estado_civil, med), y = med)) +
+p1 <- ggplot(ames2, aes(x = fct_reorder(rua_tipo, med), y = med)) +
   geom_col(fill = "#984ea3", color = "black") +
-  geom_errorbar(aes(x = estado_civil, y = med, ymin = med - se,
+  geom_errorbar(aes(x = rua_tipo, y = med, ymin = med - se,
                     ymax = med + se), width = 0.2, size = 0.9) +
-  labs(x = "Estado Civil", y = "Despesas")
+  labs(x = "Tipo de rua", y = "Área do lote")
 p1
 
-cred3 <- cred1 %>%
-  group_by(rua_tipo) %>%
-  summarise(med = mean(despesas),
-            sd = sd(despesas),n = n(),
+ames3 <- ames1 %>%
+  group_by(exterior_qualidade) %>%
+  summarise(med = mean(geral_condicao),
+            sd = sd(geral_condicao),n = n(),
             se = sd/sqrt(n)) %>%
   drop_na()
-View(cred3)
+View(ames3)
 
-p2 <- ggplot(cred3, aes(x = fct_reorder(trabalho, med), y = med)) +
+p2 <- ggplot(ames3, aes(x = fct_reorder(exterior_qualidade, med), y = med)) +
   geom_col(fill = "#ff7f00", color = "black") +
-  geom_errorbar(aes(x = trabalho, y = med, ymin = med - se,
+  geom_errorbar(aes(x = exterior_qualidade, y = med, ymin = med - se,
                     ymax = med + se), width = 0.2, size = 0.9) +
-  labs(x = "Trabalho", y = "Despesas")
+  labs(x = "Qualidade do exterior", y = "Condição geral")
 p2
 
-cred4 <- cred1 %>%
-  group_by(estado_civil) %>%
-  summarise(med = mean(renda, na.rm = T),
-            sd = sd(renda, na.rm = T),n = n(),
-            se = sd/sqrt(n)) %>%
-  drop_na()
-View(cred4)
 
-p3 <- ggplot(cred4, aes(x = fct_reorder(estado_civil, med), y = med)) +
-  geom_col(fill = "#377eb8", color = "black") +
-  geom_errorbar(aes(x = estado_civil, y = med, ymin = med - se,
-                    ymax = med + se), width = 0.2, size = 0.9) +
-  labs(x = "Estado Civil", y = "Renda")
+p3 <- ggplot(ames1, aes(x = alvenaria_area, y = geral_qualidade)) +
+  geom_point() +
+  geom_smooth() +
+  labs(x = "Área da alvenaria", y = "Qualidade geral")
 p3
 
 cred5 <- cred1 %>%

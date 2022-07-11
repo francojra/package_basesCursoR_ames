@@ -66,24 +66,24 @@ p2
 
 
 p3 <- ggplot(ames1, aes(x = alvenaria_area, y = geral_qualidade)) +
-  geom_point() +
-  geom_smooth() +
+  geom_point(size = 5, alpha = 0.7) +
+  geom_smooth(method = "lm", color = "black") +
   labs(x = "Área da alvenaria", y = "Qualidade geral")
 p3
 
-cred5 <- cred1 %>%
-  group_by(trabalho) %>%
-  summarise(med = mean(renda, na.rm = T),
-            sd = sd(renda, na.rm = T), n = n(),
+ames4 <- ames1 %>%
+  group_by(rua_tipo) %>%
+  summarise(med = mean(geral_qualidade),
+            sd = sd(geral_qualidade), n = n(),
             se = sd/sqrt(n)) %>%
   drop_na()
-View(cred5)
+View(ames4)
 
-p4 <- ggplot(cred5, aes(x = fct_reorder(trabalho, med), y = med)) +
+p4 <- ggplot(ames4, aes(x = fct_reorder(rua_tipo, med), y = med)) +
   geom_col(fill = "#e41a1c", color = "black") +
-  geom_errorbar(aes(x = trabalho, y = med, ymin = med - se,
+  geom_errorbar(aes(x = rua_tipo, y = med, ymin = med - se,
                     ymax = med + se), width = 0.2, size = 0.9) +
-  labs(x = "Trabalho", y = "Renda")
+  labs(x = "Tipo de rua", y = "Qualidade geral")
 p4
 
 grid.arrange(p1, p2, p3, p4)

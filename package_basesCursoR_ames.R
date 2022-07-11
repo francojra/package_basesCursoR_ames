@@ -43,7 +43,7 @@ ames2 <- ames1 %>%
 View(ames2)
 
 p1 <- ggplot(ames2, aes(x = fct_reorder(rua_tipo, med), y = med)) +
-  geom_col(fill = "#984ea3", color = "black") +
+  geom_col(fill = "#f4a582", color = "black") +
   geom_errorbar(aes(x = rua_tipo, y = med, ymin = med - se,
                     ymax = med + se), width = 0.2, size = 0.9) +
   labs(x = "Tipo de rua", y = "Área do lote")
@@ -58,7 +58,7 @@ ames3 <- ames1 %>%
 View(ames3)
 
 p2 <- ggplot(ames3, aes(x = fct_reorder(exterior_qualidade, med), y = med)) +
-  geom_col(fill = "#ff7f00", color = "black") +
+  geom_col(fill = "#f4a582", color = "black") +
   geom_errorbar(aes(x = exterior_qualidade, y = med, ymin = med - se,
                     ymax = med + se), width = 0.2, size = 0.9) +
   labs(x = "Qualidade do exterior", y = "Condição geral")
@@ -66,8 +66,8 @@ p2
 
 
 p3 <- ggplot(ames1, aes(x = alvenaria_area, y = geral_qualidade)) +
-  geom_point(size = 5, alpha = 0.7) +
-  geom_smooth(method = "lm", color = "black") +
+  geom_point(size = 4, alpha = 0.7) +
+  geom_smooth(method = "lm", color = "black", size = 2) +
   labs(x = "Área da alvenaria", y = "Qualidade geral")
 p3
 
@@ -80,7 +80,7 @@ ames4 <- ames1 %>%
 View(ames4)
 
 p4 <- ggplot(ames4, aes(x = fct_reorder(rua_tipo, med), y = med)) +
-  geom_col(fill = "#e41a1c", color = "black") +
+  geom_col(fill = "#f4a582", color = "black") +
   geom_errorbar(aes(x = rua_tipo, y = med, ymin = med - se,
                     ymax = med + se), width = 0.2, size = 0.9) +
   labs(x = "Tipo de rua", y = "Qualidade geral")
